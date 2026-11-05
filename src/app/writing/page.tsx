@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { WritingList } from "@/components/WritingList";
 import { site, themes } from "@/content/site";
-import { getAllPosts } from "@/content/writing";
+import { getWritingEntries } from "@/content/writing";
 
 export const metadata: Metadata = {
   title: "Writing",
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default function WritingPage() {
-  const posts = getAllPosts();
+  const posts = getWritingEntries();
   const published = posts.filter((post) => post.status === "published");
   const drafts = posts.filter((post) => post.status === "draft");
 

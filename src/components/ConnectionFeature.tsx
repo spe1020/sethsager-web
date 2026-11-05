@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ProjectAction } from "@/components/ProjectAction";
+import { formatDuration, formatEpisodeDate, getLatestEpisode } from "@/content/connection";
 import { getProject, type Project } from "@/content/projects";
 
 export function ConnectionFeature({ project }: { project: Project }) {
   const presenter = project.presentedBySlug ? getProject(project.presentedBySlug) : undefined;
+  const latest = getLatestEpisode();
 
   return (
     <article className="connection-feature">
@@ -25,6 +27,14 @@ export function ConnectionFeature({ project }: { project: Project }) {
         </p>
         <h3>{project.name}</h3>
         <p className="connection-desc">{project.description}</p>
+        {latest ? (
+          <p className="connection-latest">
+            <span className="connection-latest-label">
+              Latest episode · {formatEpisodeDate(latest.publishedAt)} · {formatDuration(latest.duration)}
+            </span>
+            <span className="connection-latest-title">{latest.title}</span>
+          </p>
+        ) : null}
         {presenter ? (
           <p className="connection-presented">
             Presented by{" "}

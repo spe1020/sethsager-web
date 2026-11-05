@@ -6,7 +6,7 @@ import { SectionHead } from "@/components/SectionHead";
 import { SelectedWork } from "@/components/SelectedWork";
 import { WritingList } from "@/components/WritingList";
 import { site, socialLinks, themes } from "@/content/site";
-import { getAllPosts } from "@/content/writing";
+import { getWritingEntries } from "@/content/writing";
 
 export const metadata: Metadata = {
   title: { absolute: `${site.name} · ${site.tagline}` },
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const posts = getAllPosts();
+  const posts = getWritingEntries();
 
   return (
     <>

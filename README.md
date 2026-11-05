@@ -8,6 +8,8 @@ Personal website for Seth Sager: builder, entrepreneur, and systems thinker. Pro
 npm install
 npm run dev        # http://localhost:3000
 npm run check      # lint + typecheck
+npm run sync       # pull the Substack and podcast feeds into content/data (see below)
+npm test           # offline tests for the sync logic
 npm run build      # static export to out/
 npm run preview    # serve out/ at http://localhost:3000 (run build first)
 ```
@@ -25,7 +27,9 @@ Also generated: `/sitemap.xml`, `/robots.txt`, a static `/og-image.png`, a `/404
 | What | Where |
 | --- | --- |
 | Projects (home, `/work`, case studies) | `src/content/projects.ts` |
-| Connection episodes | `src/content/connection.ts` |
+| Connection episodes (synced) | `content/data/podcast.json`, with hand-verified links in `content/data/podcast-curated.json` |
+| Substack articles (synced) | `content/data/substack.json` |
+| Feed sources and rules | `content/sources.json` |
 | Site config, nav, social links, portrait, email | `src/content/site.ts` |
 | `/now` | `src/content/now.ts` |
 | Essays | `content/writing/*.md` |
@@ -48,7 +52,69 @@ summary: One or two sentences.
 Markdown body…
 ```
 
-Drafts appear on `/writing` labeled as in progress, have no page, and are left out of the sitemap. Add `canonical: https://…` for a piece first published elsewhere: it is mirrored as a native page, marked "Originally published", and search engines are pointed at the original (remove the line to make this site canonical). The current essays are mirrored from the Zap Cooking Substack feed; product newsletter issues are not included.
+Drafts appear on `/writing` labeled as in progress, have no page, and are left out of the sitemap. Add `canonical: https://…` for a piece first published elsewhere: it is mirrored as a native page, marked "Originally published", and search engines are pointed at the original (remove the line to make this site canonical). The eight current essays are mirrored this way. New Substack posts do **not** need this: they appear automatically as links to the original (see "Automatic content updates"). Add a Markdown mirror only when you want the full text on this site.
+
+## Automatic content updates
+
+Publish once, on the original platform, and the site follows: articles from **Substack** (https://zapcooking.substack.com) and episodes of **Connection** (podcast RSS, Apple Podcasts, YouTube). There is no database, no runtime API, and no outside automation service. The site stays fully static.
+
+### How it works
+
+```
+every 6 hours (and on demand)            ┌─ no change ─▶ stop (nothing committed, nothing deployed)
+Sync content workflow ─▶ npm run sync ───┤
+                                         └─ changed ─▶ lint + typecheck + build ─▶ commit content/data ─▶ deploy.yml ─▶ GitHub Pages
+```
+
+1. `.github/workflows/sync-content.yml` runs at 00:17, 06:17, 12:17 and 18:17 UTC, or on demand from *Actions* → *Sync content* → *Run workflow*.
+2. `scripts/sync` fetches each source, validates it, and merges it into **committed JSON snapshots** in `content/data/`. The site is built only from those files, never from a live request, so builds are reproducible and a feed outage cannot change or break the site.
+3. If the snapshots changed, the workflow proves the site still builds, commits `content/data/` to `main` as `github-actions[bot]`, and starts `deploy.yml`. (A push made with the built-in token does not trigger other workflows, so the deploy is started explicitly.) If nothing changed it stops. Data files are only rewritten when content really changed, so there is no commit noise.
+
+### What is synced
+
+| Source | Used for | Stored in |
+| --- | --- | --- |
+| Substack RSS (feed URL is validated; if it ever fails, the feed is rediscovered from the publication's home page) | title, date, description, link to the original | `content/data/substack.json` |
+| Podcast RSS (`https://anchor.fm/s/1172d9cb4/podcast/rss`) | episode title, show notes, date, duration | `content/data/podcast.json` |
+| Apple's public iTunes Lookup API | episode Apple Podcasts links, matched by the episode's RSS `guid` | `content/data/podcast.json` |
+| YouTube channel + oEmbed | episode video, **only when verified** (below) | `content/data/podcast.json` |
+
+Rules for the data:
+
+- **Accumulating:** each run adds new items and updates existing ones. Nothing is ever removed, so history survives even when a feed only lists recent items.
+- **No duplicates:** articles are keyed by normalized URL, episodes by `guid`. A feed article that matches a local Markdown post (same `canonical` URL or same title) is shown once, as the local post.
+- **Newest first** everywhere.
+- **No drafts:** only items in the public feed are ever read. As extra guards an article must link into the publication, have a valid date, and not be dated in the future. Titles matching `excludeTitlePatterns` in `content/sources.json` are skipped; this currently hides the three "Zap Cooking Newsletter" product-update issues.
+- **No republishing:** feed articles show title, date, description, and a link to the original. Full text appears on this site only for the Markdown mirrors in `content/writing/`, which are added by hand (see "Publishing an essay").
+
+### YouTube matching (never guessed)
+
+The channel's video list only supplies candidate ids. Each candidate is checked with YouTube's oEmbed endpoint, which returns the exact title and the owning channel and rejects ids that do not exist. A video is attached to an episode only if it is on the `@ZapCooking` channel **and** one of these holds:
+
+1. its title is identical to the episode title after normalizing case, punctuation, quotes, and `&`; or
+2. the part before `|` is identical **and** both titles carry the same `Ep. N`.
+
+If a video fits two episodes, or an episode fits two videos, both are rejected. Anything else stays unlinked: the Apple Podcasts link and the show-level YouTube link are always there. If YouTube is unreachable, existing links are left exactly as they are.
+
+### Curated content
+
+`content/data/podcast-curated.json` holds links that were verified by hand (currently all eight YouTube videos, plus their Apple links). They **always win** over synced values and are never overwritten. For example, Episode 3 is titled differently on YouTube, so it can only be linked by hand. To pin or correct a link for an episode, add or edit its entry (`guid` plus `youtubeId`, `youtubeTitle`, and optionally `appleUrl`). Titles, notes, dates, and durations come from the feed so edits made in the podcast host flow through automatically.
+
+### When something goes wrong
+
+A failing source does **not** fail the workflow or block deployment. It shows up as a yellow warning annotation on the run, with details in the job summary, and the site keeps the last good data. The job only goes red if the site would not build with the new data, and in that case nothing is committed. Scheduled workflows are paused by GitHub after 60 days without repository activity; sync commits count as activity, and a manual run re-enables it.
+
+### Running and changing it
+
+```bash
+npm run sync              # update content/data from the live feeds
+npm run sync -- --dry-run # report what would change, write nothing
+npm test                  # offline tests with captured real feed data (no network)
+```
+
+Sources, the feed URLs, and the exclude patterns are in `content/sources.json`. The tests in `scripts/sync/` replay real captured responses (`scripts/sync/fixtures/`), including a total outage, a garbage feed, a YouTube outage, new and dropped items, and check the automatic YouTube matches against the hand-verified ids.
+
+The sync commits straight to `main`. If you add branch protection that requires pull requests, allow `github-actions[bot]` to bypass it for this workflow, or the commit step will fail.
 
 ## Photography
 

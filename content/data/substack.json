@@ -1,0 +1,54 @@
+{
+  "feedUrl": "https://zapcooking.substack.com/feed",
+  "items": [
+    {
+      "title": "One Rung Higher",
+      "url": "https://zapcooking.substack.com/p/one-rung-higher",
+      "publishedAt": "2026-10-24T02:45:39Z",
+      "description": "We know more about each other’s lives. How well do we know each other?"
+    },
+    {
+      "title": "Nobody Joins a Protocol",
+      "url": "https://zapcooking.substack.com/p/nobody-joins-a-protocol",
+      "publishedAt": "2026-10-17T11:59:30Z",
+      "description": "With Nostr Valley happening today and a new episode of Connection out this evening, I’ve been thinking about what actually brings people together."
+    },
+    {
+      "title": "Building Zap Cooking in the Attention Economy",
+      "url": "https://zapcooking.substack.com/p/building-zap-cooking-in-the-attention",
+      "publishedAt": "2026-10-03T12:52:55Z",
+      "description": "Changing habits and building technology that serves people"
+    },
+    {
+      "title": "The Toxic Culture of Bitcoin",
+      "url": "https://zapcooking.substack.com/p/the-toxic-culture-of-bitcoin",
+      "publishedAt": "2026-09-12T01:26:43Z",
+      "description": "We turned peer-to-peer money into a religion, a status symbol and a spectator sport."
+    },
+    {
+      "title": "Intelligence Amplification: AI Has a Branding Problem",
+      "url": "https://zapcooking.substack.com/p/intelligence-amplification-ai-has",
+      "publishedAt": "2026-09-05T02:23:57Z",
+      "description": "Artificial Was the Wrong Word"
+    },
+    {
+      "title": "The Same Principles, Different Products",
+      "url": "https://zapcooking.substack.com/p/the-same-principles-different-products",
+      "publishedAt": "2026-08-31T00:51:37Z",
+      "description": "How lean manufacturing changed how I build software"
+    },
+    {
+      "title": "Curiosity Has Leverage Now",
+      "url": "https://zapcooking.substack.com/p/curiosity-has-leverage-now",
+      "publishedAt": "2026-08-25T09:55:44Z",
+      "description": "What building Zap Cooking taught me about curiosity, technology, and being willing to figure it out"
+    },
+    {
+      "title": "Why We Built Zap Cooking (And Why It’s Bigger Than Recipes)",
+      "url": "https://zapcooking.substack.com/p/why-we-built-zap-cooking-and-why",
+      "publishedAt": "2026-02-28T17:35:47Z",
+      "description": "Most recipe apps are optimized for ads."
+    }
+  ],
+  "updatedAt": "2026-11-05T23:02:07Z"
+}
