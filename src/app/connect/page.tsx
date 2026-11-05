@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ExternalLink, PrimaryAction } from "@/components/Actions";
+import { EditorialLink, ExternalLink, PrimaryAction } from "@/components/Actions";
 import { site, socialLinks } from "@/content/site";
 import { projects } from "@/content/projects";
 
@@ -33,6 +33,12 @@ export default function ConnectPage() {
             through the profiles below.
           </p>
         )}
+      </section>
+
+      <section className="connect-block" aria-labelledby="speaking-title">
+        <h2 id="speaking-title">Speaking</h2>
+        <p>Hosting an event, podcast, or panel? Here is what I like talking about.</p>
+        <EditorialLink href="/speaking">Speaking &amp; conversations</EditorialLink>
       </section>
 
       <section className="connect-block" aria-labelledby="elsewhere-title">

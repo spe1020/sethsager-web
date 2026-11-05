@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about",
     "/connection",
     "/connect",
+    "/speaking",
     "/now",
     ...projects.map((project) => project.detailHref),
     ...getPublishedPosts()
