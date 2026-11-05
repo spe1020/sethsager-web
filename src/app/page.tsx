@@ -8,7 +8,7 @@ import { site, socialLinks, themes } from "@/content/site";
 import { getAllPosts } from "@/content/writing";
 
 export const metadata: Metadata = {
-  title: { absolute: `${site.name} · Builder, entrepreneur, systems thinker` },
+  title: { absolute: `${site.name} · ${site.tagline}` },
   description: site.thesis,
   alternates: { canonical: "/" },
 };
@@ -20,13 +20,13 @@ export default function HomePage() {
     <>
       <section className="shell hero" aria-labelledby="hero-title">
         <div className="hero-copy">
-          <p className="eyebrow">Builder · Entrepreneur · Systems thinker</p>
+          <p className="eyebrow">{site.eyebrow}</p>
           <h1 id="hero-title">
-            Ideas are easy. <em>Building is the interesting part.</em>
+            There’s always <em>a better way.</em>
           </h1>
           <p className="lede">
-            I’m Seth. I build products, improve systems, and explore how technology can make life
-            simpler, more useful, and more human.
+            I’m Seth. I build products, rethink systems, and explore ideas that make technology
+            more useful and life a little more human.
           </p>
           <div className="cta-row">
             <Link className="button button-primary" href="#selected-work">

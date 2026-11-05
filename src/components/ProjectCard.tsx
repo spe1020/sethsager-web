@@ -71,6 +71,7 @@ export function ProjectCard({
           </Link>
         </Title>
         <p className="project-card-desc">{project.description}</p>
+        {project.role ? <p className="project-role">{project.role}</p> : null}
         <p className="status" data-status={project.status}>
           {projectStatusLabel[project.status]}
         </p>

@@ -22,13 +22,11 @@ export default function OpengraphImage() {
         }}
       >
         <div style={{ fontSize: 28, letterSpacing: 6, color: "#6f2c12", fontFamily: "sans-serif" }}>
-          BUILDER · ENTREPRENEUR · SYSTEMS THINKER
+          CURIOUS BY NATURE. BUILDER BY CHOICE.
         </div>
         <div style={{ fontSize: 88, lineHeight: 1.05, display: "flex", flexDirection: "column" }}>
-          <span>Ideas are easy.</span>
-          <span style={{ color: "#9a3b16", fontStyle: "italic" }}>
-            Building is the interesting part.
-          </span>
+          <span>There’s always</span>
+          <span style={{ color: "#9a3b16", fontStyle: "italic" }}>a better way.</span>
         </div>
         <div style={{ fontSize: 36, display: "flex" }}>{site.name}</div>
       </div>

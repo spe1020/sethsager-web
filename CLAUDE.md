@@ -8,11 +8,25 @@ Persistent guide for every Claude Code session in this repository. Keep it curre
 
 **Purpose:** Personal digital headquarters for Seth Sager, an entrepreneur, builder, and systems thinker.
 
-**Core philosophy:** Ideas are easy. Building is the interesting part.
+**Hero (established — do not revert):** "There’s always a better way."
 
-**Positioning:** I build products, improve systems, and explore how technology can make life simpler, more useful, and more human.
+**Brand line:** "Curious by nature. Builder by choice." (hero eyebrow)
+
+**Core belief:** Ideas are easy; building is the interesting part. This is a private compass, not the hero line.
+
+**Positioning (hero copy):** I’m Seth. I build products, rethink systems, and explore ideas that make technology more useful and life a little more human.
 
 This is **not** a corporate résumé, a consulting-agency landing page, or a promotional site for one venture. It is a personal platform connecting entrepreneurial projects, professional experience, writing, experiments, and ideas.
+
+## Established brand guidelines
+
+Decisions Seth has made. Treat them as fixed unless he changes them.
+
+- **Hero:** "There’s always a better way." Eyebrow: "Curious by nature. Builder by choice." Never go back to "Ideas are easy. Building is the interesting part."
+- **Tone:** simple, confident, conversational, curious, and grounded.
+- **Avoid:** cheesy slogans, excessive brand philosophy, corporate language, and forced connections between projects. Do not explain how the website works.
+- **Projects section:** eyebrow "What I’m building", headline "Things I’m working on.", description "A few projects, ideas, and communities I’ve helped bring to life." Never put project counts in headings; the portfolio will keep growing.
+- **Nostr Valley is an annual event Seth co-founded**, a community initiative, not a software product.
 
 ## Brand personality
 
@@ -82,6 +96,7 @@ Add `content/writing/<slug>.md` with frontmatter: `title`, `date` (YYYY-MM-DD), 
 - **Zap Books** — https://zapbooks.io — Privacy-first accounting software with AI assistance and user-controlled financial records. Private beta.
 - **LoopSignal** — https://www.loopsignal.co — Manufacturing problem-solving software connecting evidence, corrective actions, verification, and organizational learning.
 - **Grateful Day** — https://gratefulday.space — Daily gratitude, mindfulness, and reflection.
+- **Nostr Valley** — https://nostrvalley.com — Annual gathering in State College, Pennsylvania for people interested in Nostr, Bitcoin, and the open internet. Seth is a co-founder. Third annual event: October 17, 2026, Happy Valley Brewing Company. Not a software product; status is "Annual event".
 - **Connection** — Podcast on technology, relationships, creativity, community, and the human experience. YouTube: https://www.youtube.com/@ZapCooking · Apple Podcasts: https://podcasts.apple.com/us/podcast/connection/id6811601309
 
 Projects are defined once in `src/content/projects.ts`. Internal case-study navigation (`detailHref`) stays distinct from external links (`websiteUrl`, `links`).

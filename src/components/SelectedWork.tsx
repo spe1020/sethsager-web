@@ -11,11 +11,10 @@ export function SelectedWork() {
   return (
     <section id="selected-work" className="selected-work" aria-labelledby="selected-work-title">
       <div className="section-head section-head-stacked">
-        <p className="eyebrow">Selected work</p>
-        <h2 id="selected-work-title">Five projects. One practice.</h2>
+        <p className="eyebrow">What I’m building</p>
+        <h2 id="selected-work-title">Things I’m working on.</h2>
         <p className="section-sub">
-          Software, a daily ritual, and a podcast. Each page here is my own write-up; links to the
-          live projects are marked separately.
+          A few projects, ideas, and communities I’ve helped bring to life.
         </p>
       </div>
       <div className="stack">
@@ -28,7 +27,7 @@ export function SelectedWork() {
           />
         ))}
       </div>
-      <div className="pair">
+      <div className="secondary-grid">
         {secondary.map((project) => (
           <ProjectCard key={project.slug} project={project} variant="secondary" />
         ))}
