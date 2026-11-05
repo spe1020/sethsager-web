@@ -27,7 +27,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: post.summary,
       publishedTime: post.date,
       authors: [site.name],
+      images: [{ url: "/og-image.png", width: 1200, height: 630, alt: `${site.name}: ${site.tagline}` }],
     },
+    twitter: { card: "summary_large_image", images: ["/og-image.png"] },
   };
 }
 
@@ -46,7 +48,7 @@ export default async function PostPage({ params }: PageProps) {
           description: post.summary,
           datePublished: post.date,
           author: { "@type": "Person", name: site.name, url: site.url },
-          mainEntityOfPage: post.canonical ?? `${site.url}/writing/${post.slug}`,
+          mainEntityOfPage: post.canonical ?? `${site.url}/writing/${post.slug}/`,
         }}
       />
       <EditorialLink href="/writing" direction="left">
