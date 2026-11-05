@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink } from "@/components/ExternalLink";
 import { projectStatusLabel, type Project } from "@/content/projects";
@@ -28,14 +29,20 @@ export function ProjectCard({
     <article className={className}>
       <div className="project-card-media">
         {project.coverImage ? (
-          <img
+          <Image
             className={
               project.coverImage.kind === "artwork" ? "cover cover-artwork" : "cover"
             }
             src={project.coverImage.src}
             alt={project.coverImage.alt}
-            width={project.coverImage.width}
-            height={project.coverImage.height}
+            fill
+            sizes={
+              variant === "feature"
+                ? "(max-width: 860px) 100vw, 640px"
+                : variant === "secondary"
+                  ? "(max-width: 860px) 100vw, 560px"
+                  : "(max-width: 860px) 100vw, 240px"
+            }
           />
         ) : (
           <div className="cover-fallback" role="img" aria-label={`${project.name} has no cover image yet`}>
@@ -43,7 +50,7 @@ export function ProjectCard({
           </div>
         )}
         {project.logo ? (
-          <img
+          <Image
             className="project-logo"
             src={project.logo.src}
             alt=""

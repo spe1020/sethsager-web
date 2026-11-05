@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ExternalLink } from "@/components/ExternalLink";
@@ -44,7 +45,7 @@ export default async function ProjectPage({ params }: PageProps) {
       </Link>
       <div className="detail-kicker">
         {project.logo ? (
-          <img
+          <Image
             className="detail-logo"
             src={project.logo.src}
             alt={project.logo.alt}
@@ -65,8 +66,10 @@ export default async function ProjectPage({ params }: PageProps) {
 
       {project.coverImage ? (
         <figure className="detail-cover">
-          <img
+          <Image
             src={project.coverImage.src}
+            sizes="(max-width: 1120px) 100vw, 1120px"
+            priority
             alt={project.coverImage.alt}
             width={project.coverImage.width}
             height={project.coverImage.height}

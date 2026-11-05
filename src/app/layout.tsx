@@ -1,15 +1,17 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Outfit } from "next/font/google";
 import { SiteFooter } from "@/components/SiteFooter";
+import { JsonLd } from "@/components/JsonLd";
 import { SiteHeader } from "@/components/SiteHeader";
-import { site } from "@/content/site";
+import { site, socialLinks } from "@/content/site";
 import "./globals.css";
 
 const display = Fraunces({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-display",
-  weight: ["500", "600", "700"],
+  style: ["normal", "italic"],
+  axes: ["opsz"],
 });
 
 const sans = Outfit({
@@ -26,6 +28,7 @@ export const metadata: Metadata = {
     template: `%s · ${site.name}`,
   },
   description: site.thesis,
+  alternates: { canonical: "/" },
   openGraph: {
     title: site.name,
     description: site.thesis,
@@ -34,6 +37,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {
@@ -44,6 +48,28 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" className={`${display.variable} ${sans.variable}`}>
       <body>
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "Person",
+                "@id": `${site.url}/#person`,
+                name: site.name,
+                url: site.url,
+                description: site.thesis,
+                sameAs: socialLinks.map((link) => link.href),
+              },
+              {
+                "@type": "WebSite",
+                "@id": `${site.url}/#website`,
+                url: site.url,
+                name: site.name,
+                publisher: { "@id": `${site.url}/#person` },
+              },
+            ],
+          }}
+        />
         <a className="skip" href="#content">
           Skip to content
         </a>

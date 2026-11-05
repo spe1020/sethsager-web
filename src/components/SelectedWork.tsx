@@ -10,9 +10,13 @@ export function SelectedWork() {
 
   return (
     <section id="selected-work" className="selected-work" aria-labelledby="selected-work-title">
-      <div className="section-head">
-        <h2 id="selected-work-title">Selected work</h2>
-        <p>Five projects. One practice.</p>
+      <div className="section-head section-head-stacked">
+        <p className="eyebrow">Selected work</p>
+        <h2 id="selected-work-title">Five projects. One practice.</h2>
+        <p className="section-sub">
+          Software, a daily ritual, and a podcast. Each page here is my own write-up; links to the
+          live projects are marked separately.
+        </p>
       </div>
       <div className="stack">
         {features.map((project, index) => (
@@ -35,7 +39,7 @@ export function SelectedWork() {
         ))}
       </div>
       <p className="section-more">
-        <Link href="/work">Work index</Link>
+        <Link href="/work">All work</Link>
       </p>
     </section>
   );

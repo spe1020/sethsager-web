@@ -1,17 +1,59 @@
 # sethsager-web
 
-Personal website for Seth Sager — builder, entrepreneur, and systems thinker.
+Personal website for Seth Sager: builder, entrepreneur, and systems thinker. Project guidance for contributors and Claude Code sessions lives in [`CLAUDE.md`](./CLAUDE.md).
 
-## Scripts
+## Development
 
 ```bash
 npm install
-npm run dev
-npm run build
+npm run dev        # http://localhost:3000
+npm run check      # lint + typecheck
+npm run build      # production build
+npm run start      # serve the production build
 ```
+
+Requires Node 20+.
+
+## Routes
+
+`/` · `/work` · `/work/[slug]` · `/writing` · `/writing/[slug]` · `/about` · `/connection` · `/connect` · `/now`
+
+Also generated: `/sitemap.xml`, `/robots.txt`, `/opengraph-image`, and JSON-LD structured data.
 
 ## Content
 
-Portfolio projects live in `src/content/projects.ts`. That module is the only project list: the homepage, work index, and `/work/[slug]` routes read it. `detailHref` is the internal page. `websiteUrl` and `links` leave the site.
+| What | Where |
+| --- | --- |
+| Projects (home, `/work`, case studies) | `src/content/projects.ts` |
+| Connection episodes | `src/content/connection.ts` |
+| Site config, nav, social links, portrait, email | `src/content/site.ts` |
+| `/now` | `src/content/now.ts` |
+| Essays | `content/writing/*.md` |
 
-Connection episodes live in `src/content/connection.ts`. They were taken from the public podcast feed and the YouTube channel. The show page is `/connection`.
+`detailHref` is a project's internal page; `websiteUrl` and `links` leave the site.
+
+### Publishing an essay
+
+Create `content/writing/my-slug.md`:
+
+```md
+---
+title: My title
+date: 2026-11-04
+theme: building        # building | thinking | connecting
+status: published      # draft | published
+summary: One or two sentences.
+---
+
+Markdown body…
+```
+
+Drafts appear on `/writing` labeled as in progress, have no page, and are left out of the sitemap. Add `canonical: https://…` for a piece first published elsewhere: it is mirrored as a native page, marked "Originally published", and search engines are pointed at the original (remove the line to make this site canonical). The current essays are mirrored from the Zap Cooking Substack feed; product newsletter issues are not included.
+
+### Still needed from Seth
+
+- A real portrait: add it to `public/media` and set `site.portrait` in `src/content/site.ts`.
+
+## Deployment
+
+The site is a standard Next.js app with static output for every route, so it deploys to Vercel (or any Node host running `npm run build && npm run start`). No environment variables are required. Production is deployed from `main` only after explicit approval; the canonical domain is set in `site.url`.
