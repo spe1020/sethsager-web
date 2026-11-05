@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { EpisodeList } from "@/components/EpisodeList";
-import { ExternalLink } from "@/components/ExternalLink";
+import { EditorialLink, ExternalLink, SecondaryAction } from "@/components/Actions";
 import {
   connectionShow,
   formatEpisodeDate,
@@ -69,9 +69,9 @@ export default function ConnectionPage() {
         <ul className="outbound-links">
           {project.links.map((link) => (
             <li key={link.href}>
-              <ExternalLink href={link.href} variant="pill">
+              <SecondaryAction external href={link.href}>
                 {link.label}
-              </ExternalLink>
+              </SecondaryAction>
             </li>
           ))}
         </ul>
@@ -109,7 +109,9 @@ export default function ConnectionPage() {
         </blockquote>
         <p className="source-note">From the show’s public description.</p>
         <p>
-          <Link href="/work">Back to the work index</Link>
+          <EditorialLink href="/work" direction="left">
+            Back to the work index
+          </EditorialLink>
         </p>
       </section>
     </article>

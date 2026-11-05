@@ -15,18 +15,18 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#f6f1e8",
-          color: "#1c1915",
+          background: "#f7f9fc",
+          color: "#18263b",
           padding: 80,
           fontFamily: "Georgia, serif",
         }}
       >
-        <div style={{ fontSize: 28, letterSpacing: 6, color: "#6f2c12", fontFamily: "sans-serif" }}>
+        <div style={{ fontSize: 28, letterSpacing: 6, color: "#234fc4", fontFamily: "sans-serif" }}>
           CURIOUS BY NATURE. BUILDER BY CHOICE.
         </div>
         <div style={{ fontSize: 88, lineHeight: 1.05, display: "flex", flexDirection: "column" }}>
           <span>There’s always</span>
-          <span style={{ color: "#9a3b16", fontStyle: "italic" }}>a better way.</span>
+          <span style={{ color: "#3268e8", fontStyle: "italic" }}>a better way.</span>
         </div>
         <div style={{ fontSize: 36, display: "flex" }}>{site.name}</div>
       </div>

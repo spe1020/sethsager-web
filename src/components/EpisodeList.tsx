@@ -1,4 +1,4 @@
-import { ExternalLink } from "@/components/ExternalLink";
+import { ExternalLink } from "@/components/Actions";
 import { PrivacyVideo } from "@/components/PrivacyVideo";
 import {
   formatDuration,

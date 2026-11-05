@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ExternalLink } from "@/components/ExternalLink";
+import { EditorialLink, PrimaryAction, SecondaryAction } from "@/components/Actions";
 import { getProject, getProjects, projectStatusLabel } from "@/content/projects";
 
 type PageProps = {
@@ -40,9 +40,9 @@ export default async function ProjectPage({ params }: PageProps) {
 
   return (
     <article className="shell detail-main">
-      <Link className="back-link" href="/work">
+      <EditorialLink href="/work" direction="left">
         Work
-      </Link>
+      </EditorialLink>
       <div className="detail-kicker">
         {project.logo ? (
           <Image
@@ -88,16 +88,16 @@ export default async function ProjectPage({ params }: PageProps) {
           <ul className="outbound-links">
             {project.websiteUrl ? (
               <li>
-                <ExternalLink href={project.websiteUrl} variant="pill">
-                  Visit website
-                </ExternalLink>
+                <PrimaryAction external href={project.websiteUrl}>
+                  Visit {project.name}
+                </PrimaryAction>
               </li>
             ) : null}
             {project.links.map((link) => (
               <li key={link.href}>
-                <ExternalLink href={link.href} variant="pill">
+                <SecondaryAction external href={link.href}>
                   {link.label}
-                </ExternalLink>
+                </SecondaryAction>
               </li>
             ))}
           </ul>

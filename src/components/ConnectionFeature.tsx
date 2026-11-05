@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink } from "@/components/ExternalLink";
+import { ProjectAction } from "@/components/ProjectAction";
 import { getProject, type Project } from "@/content/projects";
 
 export function ConnectionFeature({ project }: { project: Project }) {
@@ -23,12 +23,7 @@ export function ConnectionFeature({ project }: { project: Project }) {
           <span className="index-num">{String(project.displayOrder).padStart(2, "0")}</span>
           {project.category}
         </p>
-        <h3>
-          <Link href={project.detailHref} className="connection-title-link">
-            {project.name}
-            <span className="sr-only">, podcast page</span>
-          </Link>
-        </h3>
+        <h3>{project.name}</h3>
         <p className="connection-desc">{project.description}</p>
         {presenter ? (
           <p className="connection-presented">
@@ -39,17 +34,7 @@ export function ConnectionFeature({ project }: { project: Project }) {
             . The show keeps its own page on this site.
           </p>
         ) : null}
-        {project.links.length > 0 ? (
-          <ul className="listen-links">
-            {project.links.map((link) => (
-              <li key={link.href}>
-                <ExternalLink href={link.href} variant="pill-on-dark">
-                  {link.label}
-                </ExternalLink>
-              </li>
-            ))}
-          </ul>
-        ) : null}
+        <ProjectAction project={project} tone="dark" />
       </div>
     </article>
   );

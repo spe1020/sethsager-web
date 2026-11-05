@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ExternalLink } from "@/components/ExternalLink";
+import { ExternalLink, PrimaryAction } from "@/components/Actions";
 import { site, socialLinks } from "@/content/site";
 import { projects } from "@/content/projects";
 
@@ -25,9 +25,7 @@ export default function ConnectPage() {
         <h2 id="reach-title">Reach me</h2>
         {site.email ? (
           <p>
-            <a className="text-link" href={`mailto:${site.email}`}>
-              {site.email}
-            </a>
+            <PrimaryAction href={`mailto:${site.email}`}>{site.email}</PrimaryAction>
           </p>
         ) : (
           <p className="placeholder">

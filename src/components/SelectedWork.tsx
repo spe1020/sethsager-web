@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { EditorialLink } from "@/components/Actions";
 import { ConnectionFeature } from "@/components/ConnectionFeature";
 import { ProjectCard } from "@/components/ProjectCard";
 import { projectsByProminence } from "@/content/projects";
@@ -38,7 +38,7 @@ export function SelectedWork() {
         ))}
       </div>
       <p className="section-more">
-        <Link href="/work">All work</Link>
+        <EditorialLink href="/work">All work</EditorialLink>
       </p>
     </section>
   );
