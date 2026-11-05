@@ -48,7 +48,7 @@ summary: One or two sentences.
 Markdown body…
 ```
 
-Drafts appear on `/writing` labeled as in progress, have no page, and are left out of the sitemap. Add `url: https://…` to index a piece published elsewhere: it links out and gets no page here. The current essays are indexed from the Zap Cooking Substack (title, date, and subtitle from its RSS feed; product newsletter issues are not included).
+Drafts appear on `/writing` labeled as in progress, have no page, and are left out of the sitemap. Add `canonical: https://…` for a piece first published elsewhere: it is mirrored as a native page, marked "Originally published", and search engines are pointed at the original (remove the line to make this site canonical). The current essays are mirrored from the Zap Cooking Substack feed; product newsletter issues are not included.
 
 ### Still needed from Seth
 

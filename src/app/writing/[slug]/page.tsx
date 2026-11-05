@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ExternalLink } from "@/components/ExternalLink";
 import { JsonLd } from "@/components/JsonLd";
 import { site, themes } from "@/content/site";
-import { formatPostDate, getPost, getLocalPosts, renderMarkdown } from "@/content/writing";
+import { formatPostDate, getPost, getPublishedPosts, renderMarkdown } from "@/content/writing";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return getLocalPosts().map((post) => ({ slug: post.slug }));
+  return getPublishedPosts().map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: post.title,
     description: post.summary,
-    alternates: { canonical: `/writing/${post.slug}` },
+    alternates: { canonical: post.canonical ?? `/writing/${post.slug}` },
     openGraph: {
       type: "article",
       title: post.title,
@@ -46,7 +47,7 @@ export default async function PostPage({ params }: PageProps) {
           description: post.summary,
           datePublished: post.date,
           author: { "@type": "Person", name: site.name, url: site.url },
-          mainEntityOfPage: `${site.url}/writing/${post.slug}`,
+          mainEntityOfPage: post.canonical ?? `${site.url}/writing/${post.slug}`,
         }}
       />
       <Link className="back-link" href="/writing">
@@ -58,6 +59,12 @@ export default async function PostPage({ params }: PageProps) {
       <h1>{post.title}</h1>
       <p className="lede">{post.summary}</p>
       <div className="prose" dangerouslySetInnerHTML={{ __html: renderMarkdown(post.body) }} />
+      {post.canonical ? (
+        <p className="source-note article-source">
+          Originally published on Substack.{" "}
+          <ExternalLink href={post.canonical}>Read the original</ExternalLink>
+        </p>
+      ) : null}
     </article>
   );
 }

@@ -74,7 +74,7 @@ public/media/       project imagery
 
 ### Publishing writing
 
-Add `content/writing/<slug>.md` with frontmatter: `title`, `date` (YYYY-MM-DD), `summary`, `theme` (`building` | `thinking` | `connecting`), `status` (`draft` | `published`), optional `url` (canonical external link, e.g. Substack; the piece is indexed and links out with no page here). Drafts are listed on `/writing` as clearly labeled drafts with no article page and are excluded from the sitemap. Published posts get a page, metadata, and structured data automatically.
+Add `content/writing/<slug>.md` with frontmatter: `title`, `date` (YYYY-MM-DD), `summary`, `theme` (`building` | `thinking` | `connecting`), `status` (`draft` | `published`), optional `canonical` (original URL for pieces first published elsewhere, e.g. Substack; the page is a mirror with a canonical link and an "Originally published" note). Drafts are listed on `/writing` as clearly labeled drafts with no article page and are excluded from the sitemap. Published posts get a page, metadata, and structured data automatically.
 
 ## Current projects (keep accurate)
 

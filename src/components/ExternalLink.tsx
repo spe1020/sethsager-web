@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 type ExternalLinkProps = {
   href: string;
   children: ReactNode;
-  variant?: "text" | "pill" | "pill-on-dark" | "title";
+  variant?: "text" | "pill" | "pill-on-dark";
 };
 
 export function ExternalLink({ href, children, variant = "text" }: ExternalLinkProps) {

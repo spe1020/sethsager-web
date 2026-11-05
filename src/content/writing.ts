@@ -12,11 +12,11 @@ import type { ThemeKey } from "@/content/site";
  * summary: ...
  * theme: building | thinking | connecting
  * status: draft | published
- * url: (optional) canonical link when the piece lives elsewhere, e.g. Substack
+ * canonical: (optional) original URL if first published elsewhere, e.g. Substack
  * ---
  *
  * Drafts are listed (clearly labeled) but have no article page.
- * Pieces with a `url` are indexed here and link out; they get no page of their own.
+ * Pieces with a `canonical` URL are mirrored here; search engines are pointed at the original.
  */
 
 export type PostStatus = "draft" | "published";
@@ -28,8 +28,8 @@ export type PostMeta = {
   summary: string;
   theme: ThemeKey;
   status: PostStatus;
-  /** Canonical external location, if the piece is published elsewhere. */
-  url?: string;
+  /** Original location if first published elsewhere. Used as the canonical URL. */
+  canonical?: string;
 };
 
 export type Post = PostMeta & { body: string };
@@ -51,8 +51,10 @@ function parse(slug: string, raw: string): Post {
       .replace(/^"(.*)"$/, "$1");
   }
 
-  const { title, date, summary, theme, status, url } = data;
-  if (url && !url.startsWith("https://")) throw new Error(`${slug}: url must be https.`);
+  const { title, date, summary, theme, status, canonical } = data;
+  if (canonical && !canonical.startsWith("https://")) {
+    throw new Error(`${slug}: canonical must be https.`);
+  }
   if (!title || !summary) throw new Error(`${slug}: title and summary are required.`);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date ?? "")) throw new Error(`${slug}: date must be YYYY-MM-DD.`);
   if (!themes.includes(theme as ThemeKey)) throw new Error(`${slug}: unknown theme "${theme}".`);
@@ -60,7 +62,7 @@ function parse(slug: string, raw: string): Post {
     throw new Error(`${slug}: status must be draft or published.`);
   }
 
-  return { slug, title, date, summary, theme: theme as ThemeKey, status, url: url || undefined, body: match[2].trim() };
+  return { slug, title, date, summary, theme: theme as ThemeKey, status, canonical: canonical || undefined, body: match[2].trim() };
 }
 
 export function getAllPosts(): Post[] {
@@ -76,13 +78,8 @@ export function getPublishedPosts(): Post[] {
   return getAllPosts().filter((post) => post.status === "published");
 }
 
-/** Published pieces that have their own page on this site. */
-export function getLocalPosts(): Post[] {
-  return getPublishedPosts().filter((post) => !post.url);
-}
-
 export function getPost(slug: string): Post | undefined {
-  return getLocalPosts().find((post) => post.slug === slug);
+  return getPublishedPosts().find((post) => post.slug === slug);
 }
 
 export function renderMarkdown(body: string): string {
