@@ -44,6 +44,8 @@ export type Project = {
   category: string;
   /** Seth's role, where it is not simply "built it". */
   role?: string;
+  /** Label for the internal link. Defaults to "The story behind it". */
+  detailLabel?: string;
   coverImage?: ProjectImage;
   logo?: ProjectLogo;
   websiteUrl?: string;
@@ -323,6 +325,7 @@ export const projects: Project[] = [
     prominence: "editorial",
     status: "active",
     detailHref: "/connection",
+    detailLabel: "About the show",
     presentedBySlug: "zap-cooking",
   },
 ];

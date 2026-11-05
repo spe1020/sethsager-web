@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { EditorialLink, ExternalLink, PrimaryAction, SecondaryAction } from "@/components/Actions";
 import { Portrait } from "@/components/Portrait";
 import { SectionHead } from "@/components/SectionHead";
 import { SelectedWork } from "@/components/SelectedWork";
@@ -29,12 +29,8 @@ export default function HomePage() {
             more useful and life a little more human.
           </p>
           <div className="cta-row">
-            <Link className="button button-primary" href="#selected-work">
-              Explore my work
-            </Link>
-            <Link className="button button-secondary" href="/writing">
-              Read my writing
-            </Link>
+            <PrimaryAction href="#selected-work">Explore my work</PrimaryAction>
+            <SecondaryAction href="/writing">Read my writing</SecondaryAction>
           </div>
         </div>
         <Portrait priority />
@@ -77,7 +73,7 @@ export default function HomePage() {
         </SectionHead>
         <WritingList posts={posts} limit={4} />
         <p className="section-more">
-          <Link href="/writing">All writing</Link>
+          <EditorialLink href="/writing">All writing</EditorialLink>
         </p>
       </section>
 
@@ -101,9 +97,7 @@ export default function HomePage() {
             ))}
           </ul>
           <p>
-            <Link className="text-link" href="/about">
-              More about me
-            </Link>
+            <EditorialLink href="/about">More about me</EditorialLink>
           </p>
         </div>
       </section>
@@ -119,16 +113,11 @@ export default function HomePage() {
             </p>
           </div>
           <div className="cta-row">
-            <Link className="button button-primary" href="/connect">
-              Get in touch
-            </Link>
-            <ul className="inline-socials">
+            <PrimaryAction href="/connect">Get in touch</PrimaryAction>
+            <ul className="outbound-links">
               {socialLinks.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} target="_blank" rel="noopener noreferrer">
-                    {link.label}
-                    <span className="sr-only"> (opens in a new tab)</span>
-                  </a>
+                  <ExternalLink href={link.href}>{link.label}</ExternalLink>
                 </li>
               ))}
             </ul>

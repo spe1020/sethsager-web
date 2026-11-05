@@ -42,18 +42,50 @@ Avoid corporate jargon, exaggerated accomplishments, buzzwords, and generic mark
 
 ## Design principles
 
-Modern editorial design with the sensibility of an independent technology founder.
+Modern editorial design with the sensibility of an independent technology founder. The direction is **Modern Blue**.
 
-- Warm ivory backgrounds, deep charcoal type, restrained burnt-orange accents
+**Palette** (CSS custom properties at the top of `src/app/globals.css`; never hard-code colors):
+
+| Token | Hex | Use |
+| --- | --- | --- |
+| `--midnight` | `#18263B` | Primary text, dark bands, primary buttons |
+| `--blue` | `#3268E8` | Accent, arrow segments, focus ring, nav indicator |
+| `--sky` | `#78BAEF` | Accent on dark surfaces |
+| `--ice` | `#EAF2FC` | Light tint: secondary buttons, bands, badges |
+| `--canvas` | `#F7F9FC` | Page background |
+| `--blue-ink` | `#234FC4` | Blue for text/links on light backgrounds (6.6:1). Plain `--blue` on canvas is only 4.6:1, so use it for large text and fills |
+
 - Sophisticated typography (Fraunces display, Outfit text)
 - Generous whitespace, strong hierarchy
+- Crisp geometry: 4px radius on controls and badges, 10px on cards, 8px on images. No fully rounded pills.
 - Subtle, purposeful interaction; honor `prefers-reduced-motion`
 - Mobile-first
 - Authentic imagery only
 
-Avoid: generic SaaS templates, heavy gradients, glassmorphism, decorative particles, stock photography, unnecessary visual complexity.
+Avoid: generic SaaS templates, gradients, glows, heavy shadows, glassmorphism, decorative particles, stock photography, unnecessary visual complexity.
 
-Design tokens live as CSS custom properties at the top of `src/app/globals.css`. Use them; do not hard-code new colors.
+## Interaction system
+
+All interactive components live in `src/components/Actions.tsx` (plus `ProjectAction.tsx`). Use them; do not hand-roll links or buttons.
+
+| Component | Use for |
+| --- | --- |
+| `PrimaryAction` | The one main CTA in a region. Split button: midnight label + separate blue arrow segment. |
+| `SecondaryAction` | Supporting action. Ice fill, outlined, inline arrow. |
+| `EditorialLink` | Navigation links that are not CTAs ("All work", "More about me"). Text + arrow over a fine divider. `direction="left"` for back links. |
+| `ExternalLink` | Any destination off this site. Editorial link with a diagonal arrow. Opens a new tab. |
+| `ProjectAction` | Project card links: "The story behind it" (internal, right arrow) and "Visit [Project]" (external, diagonal arrow). |
+
+Rules:
+
+- **Semantics:** destinations are real links (`next/link`, or `<a>` for external and `mailto:`). Things that act (retry, play) are real `<button>`s. Pass `onClick` instead of `href` to get a button.
+- **Arrows:** right arrow = internal, diagonal arrow = external, left arrow = back. Hover moves the arrow 3–5px (right/left 4px, diagonal 3px,-3px).
+- **Don't over-button:** buttons are for CTAs. Everything else is an `EditorialLink` or a plain in-text link. In-text links stay as ordinary underlined links.
+- **Cards:** one internal link per card. It stretches over the card (`stretch` prop), so the card is clickable. External links sit above that overlay (`z-index`), so they never get swallowed. Do not add a second internal link to a card.
+- **Motion:** 180ms, `transform` and `color` only. No animation library. Reduced motion removes all transforms and transitions (see the end of `globals.css`).
+- **Accessibility:** touch targets are at least 44px (buttons 48px). Focus is a 2px blue ring (sky on dark). External links announce "(opens in a new tab)". Arrows are `aria-hidden`.
+- **Tone:** `tone="dark"` variants exist for midnight surfaces.
+- **Mobile navigation:** below 860px the header shows a Menu button (`aria-expanded`, `aria-controls`, Escape closes and returns focus to it). Without JavaScript the menu is shown open.
 
 ## Technology
 

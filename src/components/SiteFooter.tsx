@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ExternalLink } from "@/components/ExternalLink";
+import { ExternalLink } from "@/components/Actions";
 import { navigation, site, socialLinks } from "@/content/site";
 
 export function SiteFooter() {

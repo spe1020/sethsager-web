@@ -1,6 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
-import { ExternalLink } from "@/components/ExternalLink";
+import { ProjectAction } from "@/components/ProjectAction";
 import { projectStatusLabel, type Project } from "@/content/projects";
 
 type ProjectCardProps = {
@@ -64,31 +63,13 @@ export function ProjectCard({
           <span className="index-num">{String(project.displayOrder).padStart(2, "0")}</span>
           {project.category}
         </p>
-        <Title>
-          <Link href={project.detailHref} className="project-card-link">
-            {project.name}
-            <span className="sr-only">, project details</span>
-          </Link>
-        </Title>
+        <Title>{project.name}</Title>
         <p className="project-card-desc">{project.description}</p>
         {project.role ? <p className="project-role">{project.role}</p> : null}
         <p className="status" data-status={project.status}>
           {projectStatusLabel[project.status]}
         </p>
-        {project.websiteUrl || project.links.length > 0 ? (
-          <ul className="outbound-links">
-            {project.websiteUrl ? (
-              <li>
-                <ExternalLink href={project.websiteUrl}>Visit website</ExternalLink>
-              </li>
-            ) : null}
-            {project.links.map((link) => (
-              <li key={link.href}>
-                <ExternalLink href={link.href}>{link.label}</ExternalLink>
-              </li>
-            ))}
-          </ul>
-        ) : null}
+        <ProjectAction project={project} />
       </div>
     </article>
   );

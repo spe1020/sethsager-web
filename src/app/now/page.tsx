@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { EditorialLink } from "@/components/Actions";
 import { now } from "@/content/now";
 import { site } from "@/content/site";
 import { formatEpisodeDate } from "@/content/connection";
@@ -28,9 +28,7 @@ export default function NowPage() {
         </section>
       ))}
       <p>
-        <Link className="text-link" href="/work">
-          See the projects
-        </Link>
+        <EditorialLink href="/work">See the projects</EditorialLink>
       </p>
     </div>
   );

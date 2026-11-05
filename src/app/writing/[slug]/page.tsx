@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ExternalLink } from "@/components/ExternalLink";
+import { EditorialLink, ExternalLink } from "@/components/Actions";
 import { JsonLd } from "@/components/JsonLd";
 import { site, themes } from "@/content/site";
 import { formatPostDate, getPost, getPublishedPosts, renderMarkdown } from "@/content/writing";
@@ -50,9 +49,9 @@ export default async function PostPage({ params }: PageProps) {
           mainEntityOfPage: post.canonical ?? `${site.url}/writing/${post.slug}`,
         }}
       />
-      <Link className="back-link" href="/writing">
+      <EditorialLink href="/writing" direction="left">
         Writing
-      </Link>
+      </EditorialLink>
       <p className="eyebrow">
         {themes[post.theme].label} · <time dateTime={post.date}>{formatPostDate(post.date)}</time>
       </p>
