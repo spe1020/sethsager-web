@@ -15,6 +15,7 @@ export const now = {
         "Zap Books: privacy-first accounting software, currently in private beta.",
         "LoopSignal: manufacturing problem-solving software that keeps evidence, actions, and learning connected.",
         "Grateful Day: a small daily practice for gratitude and reflection.",
+        "Nostr Valley: the annual Nostr and Bitcoin gathering in State College, Pennsylvania, which I co-founded.",
       ],
     },
     {

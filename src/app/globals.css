@@ -219,15 +219,22 @@ ul {
 }
 
 .stack,
-.pair,
+.secondary-grid,
 .thread-grid {
   display: grid;
   gap: 1.15rem;
 }
 
-.pair {
-  grid-template-columns: 1fr 1fr;
+.secondary-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-top: 1.15rem;
+}
+
+.project-role {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ember-deep);
 }
 
 .editorial-slot {
@@ -854,7 +861,7 @@ ul {
 }
 
 @media (max-width: 860px) {
-  .pair,
+  .secondary-grid,
   .thread-grid,
   .project-card-feature,
   .project-card-feature.is-reverse,
@@ -906,6 +913,7 @@ ul {
 
 h1 em,
 h2 em {
+  white-space: nowrap;
   font-style: italic;
   font-weight: 500;
   color: var(--ember);

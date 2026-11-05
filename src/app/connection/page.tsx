@@ -44,7 +44,6 @@ export default function ConnectionPage() {
             Presented by <Link href={presenter.detailHref}>{presenter.name}</Link>.{" "}
           </>
         ) : null}
-        The show has its own page here, separate from the product that presents it.
       </p>
       <p className="status" data-status={project.status}>
         {projectStatusLabel[project.status]}
@@ -109,12 +108,6 @@ export default function ConnectionPage() {
           ))}
         </blockquote>
         <p className="source-note">From the show’s public description.</p>
-        <p>
-          Connection sits beside the software on purpose. The tools try to make a complicated
-          task simpler and leave the person using them in charge of the result. The show is that
-          same interest, spoken: building, creativity, technology, community, relationships, and
-          the rest of a human life. Zap Cooking presents it. The conversation keeps its own name.
-        </p>
         <p>
           <Link href="/work">Back to the work index</Link>
         </p>

@@ -63,6 +63,7 @@ export default async function ProjectPage({ params }: PageProps) {
       </div>
       <h1>{project.name}</h1>
       <p className="lede">{project.description}</p>
+      {project.role ? <p className="project-role">{project.role}</p> : null}
 
       {project.coverImage ? (
         <figure className="detail-cover">

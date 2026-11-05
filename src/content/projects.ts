@@ -4,7 +4,7 @@
  * `websiteUrl` and `links` leave the site. `detailHref` stays on it.
  */
 
-export type ProjectStatus = "active" | "private-beta";
+export type ProjectStatus = "active" | "private-beta" | "annual-event";
 
 export type ProjectProminence = "feature" | "secondary" | "editorial";
 
@@ -42,6 +42,8 @@ export type Project = {
   slug: string;
   description: string;
   category: string;
+  /** Seth's role, where it is not simply "built it". */
+  role?: string;
   coverImage?: ProjectImage;
   logo?: ProjectLogo;
   websiteUrl?: string;
@@ -62,6 +64,7 @@ export type Project = {
 export const projectStatusLabel: Record<ProjectStatus, string> = {
   active: "Active",
   "private-beta": "Private beta",
+  "annual-event": "Annual event",
 };
 
 export const projects: Project[] = [
@@ -105,7 +108,6 @@ export const projects: Project[] = [
           heading: "What the public product holds",
           paragraphs: [
             "Sous Chef, described on the site, turns a recipe link into a recipe you can review before saving or sharing it. The homepage also makes room for browsing what other people have cooked and written.",
-            "It sits with the rest of this work because cooking is a practical, social act that had gotten scattered. Zap Cooking is a simpler place to do it, with payment left in the hands of the people at the table.",
           ],
         },
       ],
@@ -199,7 +201,6 @@ export const projects: Project[] = [
           heading: "Where it stands",
           paragraphs: [
             "The public example uses fictional records saved in the browser. The site describes company accounts, shared storage, and subscriptions as a later milestone. Numbers shown in the example investigation are part of that fiction, not a reported plant result.",
-            "It belongs with the practical tools here: a complicated shop-floor loop, made simple enough that the next shift inherits the story and not only a status.",
           ],
         },
       ],
@@ -242,9 +243,50 @@ export const projects: Project[] = [
           ],
         },
         {
-          heading: "Why it is in this index",
+          heading: "How it works",
           paragraphs: [
-            "Not every project here is a business tool. Grateful Day is a small daily practice, kept simple on purpose. The person using it decides what the day means. The software holds the calendar and the prompt.",
+            "Grateful Day is a small daily practice, kept simple on purpose. The person using it decides what the day means. The software holds the calendar and the prompt.",
+          ],
+        },
+      ],
+    },
+  },
+  {
+    name: "Nostr Valley",
+    slug: "nostr-valley",
+    description:
+      "An annual gathering in State College, Pennsylvania, bringing together people interested in Nostr, Bitcoin, and the open internet.",
+    category: "Community / Events / Open Technology",
+    role: "Co-founder",
+    coverImage: {
+      src: "/media/nostr-valley-cover.jpg",
+      alt: "Nostr Valley logo: a mountain lion above a purple ostrich in a mountain valley, inside a circular badge reading Nostr Valley.",
+      width: 1200,
+      height: 750,
+      kind: "artwork",
+      caption: "The Nostr Valley logo, from nostrvalley.com.",
+    },
+    websiteUrl: "https://nostrvalley.com",
+    links: [],
+    featured: true,
+    displayOrder: 5,
+    prominence: "secondary",
+    status: "annual-event",
+    detailHref: "/work/nostr-valley",
+    caseStudy: {
+      sections: [
+        {
+          heading: "What it is",
+          paragraphs: [
+            "Nostr Valley is an annual gathering in State College, Pennsylvania, for people interested in Nostr, Bitcoin, and the open internet. It is a community event, not a software product.",
+            "I co-founded it. It brings together builders, creators, and curious people around Nostr, Bitcoin, and the open internet.",
+          ],
+        },
+        {
+          heading: "Nostr Valley III",
+          paragraphs: [
+            "The third annual gathering took place on October 17, 2026, from noon to 4 PM at Happy Valley Brewing Company in State College.",
+            "The day was a lineup of short talks followed by a closing panel on the state of Nostr culture. I gave a talk, “Nobody Joins a Protocol — What We Learned Building Zap Cooking,” and joined that panel. Details and updates are on the event website.",
           ],
         },
       ],
@@ -277,7 +319,7 @@ export const projects: Project[] = [
       },
     ],
     featured: true,
-    displayOrder: 5,
+    displayOrder: 6,
     prominence: "editorial",
     status: "active",
     detailHref: "/connection",

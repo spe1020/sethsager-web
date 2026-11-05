@@ -14,12 +14,9 @@ export default function WorkPage() {
 
   return (
     <div className="shell page-intro">
-      <p className="eyebrow">Index</p>
-      <h1>Work</h1>
-      <p className="lede">
-        {site.thesis} The list below is the whole portfolio, in the order I want it read:
-        the larger product work first, then the daily practice, then the show.
-      </p>
+      <p className="eyebrow">What I’m building</p>
+      <h1>Things I’m working on.</h1>
+      <p className="lede">A few projects, ideas, and communities I’ve helped bring to life.</p>
       <div className="project-list">
         {projects.map((project) => (
           <ProjectCard

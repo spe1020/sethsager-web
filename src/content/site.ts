@@ -3,8 +3,9 @@ export const site = {
   url: "https://sethsager.com",
   /** Short statement used in metadata and the footer. */
   thesis:
-    "I build products, improve systems, and explore how technology can make life simpler, more useful, and more human.",
-  tagline: "Ideas are easy. Building is the interesting part.",
+    "I build products, rethink systems, and explore ideas that make technology more useful and life a little more human.",
+  eyebrow: "Curious by nature. Builder by choice.",
+  tagline: "There’s always a better way.",
   /**
    * Real portrait of Seth. Leave null until a photo is added to /public/media.
    * Never generate or substitute a fictional image.
