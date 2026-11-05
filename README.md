@@ -50,10 +50,6 @@ Markdown body…
 
 Drafts appear on `/writing` labeled as in progress, have no page, and are left out of the sitemap. Add `canonical: https://…` for a piece first published elsewhere: it is mirrored as a native page, marked "Originally published", and search engines are pointed at the original (remove the line to make this site canonical). The current essays are mirrored from the Zap Cooking Substack feed; product newsletter issues are not included.
 
-### Still needed from Seth
-
-- A real portrait: add it to `public/media` and set `site.portrait` in `src/content/site.ts`.
-
 ## Deployment
 
 The site is a standard Next.js app with static output for every route, so it deploys to Vercel (or any Node host running `npm run build && npm run start`). No environment variables are required. Production is deployed from `main` only after explicit approval; the canonical domain is set in `site.url`.
