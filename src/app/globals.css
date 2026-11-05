@@ -946,6 +946,71 @@ h2 em {
   text-transform: uppercase;
 }
 
+.writing-external {
+  display: inline;
+  text-decoration: none;
+}
+
+.writing-external .arrow {
+  width: 0.62em;
+  height: 0.62em;
+  margin-left: 0.3em;
+  vertical-align: 0.05em;
+  color: var(--blue-ink);
+}
+
+.writing-external:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
+.writing-external:hover .arrow {
+  transform: translate(2px, -2px);
+}
+
+.writing-original {
+  margin: 0.25rem 0 0;
+}
+
+.episode-notes {
+  max-width: 66ch;
+  margin: 0.2rem 0 0.8rem;
+}
+
+.episode-notes summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--blue-ink);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.episode-notes p {
+  color: var(--midnight-soft);
+}
+
+.connection-latest {
+  display: grid;
+  gap: 0.15rem;
+  margin: 1rem 0 0;
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--sky);
+}
+
+.connection-latest-label {
+  color: var(--sky);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.connection-latest-title {
+  color: #fff;
+  font-weight: 600;
+}
+
 .writing-block {
   margin-top: 2.6rem;
 }

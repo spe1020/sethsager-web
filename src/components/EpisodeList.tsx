@@ -1,6 +1,7 @@
 import { ExternalLink } from "@/components/Actions";
 import { PrivacyVideo } from "@/components/PrivacyVideo";
 import {
+  connectionShow,
   formatDuration,
   formatEpisodeDate,
   titlesDiffer,
@@ -42,9 +43,17 @@ export function EpisodeList({
                 <span>{formatDuration(episode.duration)}</span>
               </p>
               <p>{episode.summary}</p>
+              {episode.notes.length > 0 ? (
+                <details className="episode-notes">
+                  <summary>Show notes</summary>
+                  {episode.notes.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </details>
+              ) : null}
               <ul className="outbound-links">
                 <li>
-                  <ExternalLink href={episode.appleUrl}>Apple Podcasts</ExternalLink>
+                  <ExternalLink href={episode.appleUrl ?? connectionShow.appleShowUrl}>Apple Podcasts</ExternalLink>
                 </li>
                 {episode.youtubeId ? (
                   <li>

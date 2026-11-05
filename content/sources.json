@@ -1,0 +1,12 @@
+{
+  "writing": {
+    "siteUrl": "https://zapcooking.substack.com",
+    "feedUrl": "https://zapcooking.substack.com/feed",
+    "excludeTitlePatterns": ["^Zap Cooking Newsletter"]
+  },
+  "connection": {
+    "feedUrl": "https://anchor.fm/s/1172d9cb4/podcast/rss",
+    "appleShowUrl": "https://podcasts.apple.com/us/podcast/connection/id6811601309",
+    "youtubeChannelUrl": "https://www.youtube.com/@ZapCooking"
+  }
+}

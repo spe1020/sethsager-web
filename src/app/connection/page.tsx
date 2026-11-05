@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 export default function ConnectionPage() {
   const featured = getFeaturedEpisodes();
   const earlier = getEarlierEpisodes();
-  const verifiedLabel = formatEpisodeDate(`${connectionShow.verifiedOn}T12:00:00Z`);
+  const updatedLabel = connectionShow.updatedAt ? formatEpisodeDate(connectionShow.updatedAt) : null;
 
   return (
     <article className="shell connection-page">
@@ -87,8 +87,8 @@ export default function ConnectionPage() {
       <section className="episode-block" aria-labelledby="featured-episodes">
         <h2 id="featured-episodes">Featured episodes</h2>
         <p className="source-note">
-          Titles, dates, durations, and the lines below are from the public podcast feed, checked
-          on {verifiedLabel}. Video ids were confirmed on the YouTube channel.{" "}
+          Episodes update automatically from the public podcast feed{updatedLabel ? `, last updated ${updatedLabel}` : ""}.
+          A YouTube video is shown only when it has been verified as that episode.{" "}
           <ExternalLink href={connectionShow.feedUrl}>Podcast RSS</ExternalLink>
         </p>
         <EpisodeList

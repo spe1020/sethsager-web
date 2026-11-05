@@ -1,0 +1,73 @@
+name: Sync content
+
+# Checks the Substack and Connection feeds every 6 hours. If anything new was
+# found, commits the updated snapshots in content/data/ and triggers a deploy.
+# If nothing changed, nothing is committed and nothing is deployed.
+#
+# Feed problems never fail this job: they appear as warnings (and in the job
+# summary) and the last good data stays in place. The job only fails if the
+# site would not build with the new data, in which case nothing is committed.
+on:
+  schedule:
+    - cron: "17 */6 * * *" # 00:17, 06:17, 12:17, 18:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write # commit the synced data to main
+  actions: write # start the deploy workflow (see the last step)
+
+concurrency:
+  group: sync-content
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v7
+        with:
+          ref: main
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test the sync logic
+        run: npm test
+
+      - name: Sync feeds
+        id: sync
+        run: npm run sync
+
+      # Only when something changed: prove the site still builds with the new data.
+      - name: Lint, type check, build
+        if: steps.sync.outputs.changed == 'true'
+        run: |
+          npm run lint
+          npm run typecheck
+          npm run build
+
+      - name: Commit updated content
+        id: commit
+        if: steps.sync.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/data
+          git commit -m "Sync content from Substack and Connection feeds"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      # A push made with the built-in GITHUB_TOKEN does not trigger other
+      # workflows, so start the deploy explicitly.
+      - name: Deploy updated site
+        if: steps.sync.outputs.changed == 'true'
+        run: gh workflow run deploy.yml --ref main
+        env:
+          GH_TOKEN: ${{ github.token }}
