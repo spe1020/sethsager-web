@@ -12,7 +12,7 @@ export const site = {
    * Never generate or substitute a fictional image.
    */
   portrait: {
-    src: "/media/seth-sager-portrait.png",
+    src: "/media/seth-sager-portrait.jpg",
     alt: "Seth Sager smiling, wearing glasses, a dark blazer, and a blue shirt.",
     width: 400,
     height: 400,

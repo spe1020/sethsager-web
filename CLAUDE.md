@@ -91,7 +91,8 @@ Rules:
 ## Technology
 
 - Next.js App Router, React, TypeScript (strict), plain CSS in `src/app/globals.css`
-- Writing is Markdown with frontmatter, rendered on the server with `marked`
+- Writing is Markdown with frontmatter, rendered at build time with `marked`
+- **Hosting: GitHub Pages**, a fully static export (`output: "export"`, `trailingSlash: true`, unoptimized images). Deployed by `.github/workflows/deploy.yml` on every push to `main`. Domain: https://sethsager.com
 - No database, no CMS, no CSS framework. Add dependencies only with a clear reason.
 
 Engineering standards:
@@ -106,7 +107,7 @@ Engineering standards:
 ### Layout of the repo
 
 ```
-src/app/            routes, metadata, sitemap, robots, OG images
+src/app/            routes, metadata, sitemap, robots
 src/components/     reusable presentation components
 src/content/        typed content: site.ts, projects.ts, connection.ts, now.ts, writing.ts
 content/writing/    Markdown essays (frontmatter + body)
@@ -119,7 +120,7 @@ public/media/       project imagery; public/media/photos/ holds the personal pho
 
 Primary navigation is six items (Work, Writing, Speaking, Connection, About, Connect) so the header stays uncrowded. Lower-priority pages such as `/now` live in the footer (`secondaryNavigation` in `site.ts`).
 
-`/connection` is the Connection project's detail page (see `detailHref` in `projects.ts`); `/work/connection` redirects there.
+`/connection` is the Connection project's detail page (see `detailHref` in `projects.ts`); `/work/connection/` is a static meta-refresh page that forwards there.
 
 ### Publishing writing
 
@@ -198,7 +199,22 @@ For every meaningful feature:
 7. Run `npm run lint`, `npm run typecheck`, and `npm run build`.
 8. Summarize changes and outstanding issues.
 
-Work in feature branches and open pull requests. **Never merge to `main` or deploy to production without Seth's explicit approval.**
+Work in feature branches and open pull requests. **Never merge to `main` or deploy to production without Seth's explicit approval. Merging to `main` IS a production deploy**, because the workflow publishes every push. Never enable Pages, change DNS, or alter the custom domain.
+
+## Static hosting rules (GitHub Pages)
+
+The site must always build as a static export. Full detail is in the README ("Deployment").
+
+- No server features: middleware, rewrites, headers, config `redirects()`, API routes, server actions, ISR, request APIs.
+- Redirects are static meta-refresh pages (see `/work/[slug]` for slugs whose `detailHref` is elsewhere).
+- Every dynamic route needs complete `generateStaticParams()` and `dynamicParams = false`.
+- `sitemap.ts` and `robots.ts` stay `force-static`. Sitemap URLs and canonicals end in `/`.
+- Images are served as-is (`images.unoptimized`). Keep files in `public/media` small and pre-sized.
+- The social image is the static file `public/og-image.png`. GitHub Pages cannot serve extensionless files as images, so do not reintroduce a generated `opengraph-image` route.
+- Use root-relative paths (`/media/...`). Do not add a `basePath` or a `/sethsager-web` prefix; the site is served from the custom domain root.
+- Everything external uses `https`.
+- Do not add server-side dependencies.
+- Test the real output: `npm run build && npm run preview`.
 
 ## Commands
 
@@ -207,5 +223,6 @@ npm run dev        # local development
 npm run lint       # ESLint
 npm run typecheck  # tsc --noEmit
 npm run check      # lint + typecheck
-npm run build      # production build
+npm run build      # static export to out/
+npm run preview    # serve out/ locally (after build)
 ```

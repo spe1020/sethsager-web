@@ -10,9 +10,9 @@ type PageProps = {
 };
 
 export function generateStaticParams() {
-  return getProjects()
-    .filter((project) => project.detailHref === `/work/${project.slug}`)
-    .map((project) => ({ slug: project.slug }));
+  // Every project gets a page. Ones whose detail page lives elsewhere (for
+  // example Connection at /connection) render a static redirect to it.
+  return getProjects().map((project) => ({ slug: project.slug }));
 }
 
 export const dynamicParams = false;
@@ -21,7 +21,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) return { title: "Work" };
+  const moved = project.detailHref !== `/work/${project.slug}`;
   return {
+    ...(moved ? { robots: { index: false } } : {}),
     title: project.name,
     description: project.description,
     alternates: { canonical: project.detailHref },
@@ -31,8 +33,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function ProjectPage({ params }: PageProps) {
   const { slug } = await params;
   const project = getProject(slug);
-  if (!project || project.detailHref !== `/work/${project.slug}`) {
-    notFound();
+  if (!project) notFound();
+  if (project.detailHref !== `/work/${project.slug}`) {
+    // Static hosting has no server redirects, so this is a plain HTML page that
+    // forwards with a meta refresh and still works without JavaScript.
+    return (
+      <div className="shell page-intro">
+        <meta httpEquiv="refresh" content={`0; url=${project.detailHref}/`} />
+        <h1>{project.name}</h1>
+        <p className="lede">
+          This page has moved.{" "}
+          <EditorialLink href={project.detailHref}>Continue to {project.name}</EditorialLink>
+        </p>
+      </div>
+    );
   }
 
   const others = getProjects().filter((item) => item.slug !== project.slug);
