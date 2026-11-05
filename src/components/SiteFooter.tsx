@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { navigation, site } from "@/content/site";
+import { ExternalLink } from "@/components/ExternalLink";
+import { navigation, site, socialLinks } from "@/content/site";
 
 export function SiteFooter() {
   return (
@@ -9,18 +10,27 @@ export function SiteFooter() {
           <p className="wordmark footer-name">{site.name}</p>
           <p className="footer-thesis">{site.thesis}</p>
         </div>
-        <nav aria-label="Footer">
-          <ul className="nav-list">
-            <li>
-              <Link href="/">Home</Link>
-            </li>
-            {navigation.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href}>{item.label}</Link>
+        <div className="footer-nav">
+          <nav aria-label="Footer">
+            <ul className="nav-list">
+              <li>
+                <Link href="/">Home</Link>
+              </li>
+              {navigation.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href}>{item.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <ul className="outbound-links footer-social" aria-label="Elsewhere">
+            {socialLinks.map((link) => (
+              <li key={link.href}>
+                <ExternalLink href={link.href}>{link.label}</ExternalLink>
               </li>
             ))}
           </ul>
-        </nav>
+        </div>
       </div>
     </footer>
   );

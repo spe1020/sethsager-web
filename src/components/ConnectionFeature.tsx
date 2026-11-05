@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink } from "@/components/ExternalLink";
 import { getProject, type Project } from "@/content/projects";
@@ -8,8 +9,9 @@ export function ConnectionFeature({ project }: { project: Project }) {
   return (
     <article className="connection-feature">
       {project.coverImage ? (
-        <img
+        <Image
           className="connection-artwork"
+          sizes="260px"
           src={project.coverImage.src}
           alt={project.coverImage.alt}
           width={project.coverImage.width}

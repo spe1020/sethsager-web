@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { EpisodeList } from "@/components/EpisodeList";
 import { ExternalLink } from "@/components/ExternalLink";
@@ -51,8 +52,9 @@ export default function ConnectionPage() {
 
       {project.coverImage ? (
         <figure className="detail-cover connection-hero-art">
-          <img
+          <Image
             src={project.coverImage.src}
+            priority
             alt={project.coverImage.alt}
             width={280}
             height={280}
