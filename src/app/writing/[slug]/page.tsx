@@ -3,14 +3,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";
 import { site, themes } from "@/content/site";
-import { formatPostDate, getPost, getPublishedPosts, renderMarkdown } from "@/content/writing";
+import { formatPostDate, getPost, getLocalPosts, renderMarkdown } from "@/content/writing";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return getPublishedPosts().map((post) => ({ slug: post.slug }));
+  return getLocalPosts().map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

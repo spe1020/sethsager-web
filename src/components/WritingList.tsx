@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ExternalLink } from "@/components/ExternalLink";
 import { formatPostDate, type PostMeta } from "@/content/writing";
 import { themes } from "@/content/site";
 
@@ -20,13 +21,18 @@ export function WritingList({ posts, limit }: { posts: PostMeta[]; limit?: numbe
             )}
           </p>
           <h3>
-            {post.status === "published" ? (
+            {post.status === "published" && post.url ? (
+              <ExternalLink href={post.url} variant="title">
+                {post.title}
+              </ExternalLink>
+            ) : post.status === "published" ? (
               <Link href={`/writing/${post.slug}`}>{post.title}</Link>
             ) : (
               post.title
             )}
           </h3>
           <p>{post.summary}</p>
+          {post.url ? <p className="source-note">Published on Substack</p> : null}
         </li>
       ))}
     </ul>

@@ -38,8 +38,7 @@ export default function WritingPage() {
         </section>
       ) : (
         <p className="placeholder writing-block">
-          Nothing is published yet. The pieces below are topics I am working on, not finished
-          articles.
+          Nothing is published yet.
         </p>
       )}
 

@@ -454,6 +454,24 @@ ul {
   color: #161311;
 }
 
+.external-link-title {
+  display: inline;
+  min-height: 0;
+  color: var(--ink);
+  font-weight: inherit;
+}
+
+.external-link-title:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
+.writing-item .source-note {
+  margin: 0.4rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
 .external-icon {
   width: 0.9rem;
   height: 0.9rem;

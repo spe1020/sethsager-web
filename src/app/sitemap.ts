@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { projects } from "@/content/projects";
 import { site } from "@/content/site";
-import { getPublishedPosts } from "@/content/writing";
+import { getLocalPosts } from "@/content/writing";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [
@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/connect",
     "/now",
     ...projects.map((project) => project.detailHref),
-    ...getPublishedPosts().map((post) => `/writing/${post.slug}`),
+    ...getLocalPosts().map((post) => `/writing/${post.slug}`),
   ];
   return [...new Set(paths)].map((path) => ({ url: `${site.url}${path === "/" ? "" : path}` }));
 }

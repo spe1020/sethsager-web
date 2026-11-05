@@ -48,12 +48,11 @@ summary: One or two sentences.
 Markdown body…
 ```
 
-Drafts appear on `/writing` labeled as in progress, have no page, and are left out of the sitemap. The six current files are drafts with placeholder text only.
+Drafts appear on `/writing` labeled as in progress, have no page, and are left out of the sitemap. Add `url: https://…` to index a piece published elsewhere: it links out and gets no page here. The current essays are indexed from the Zap Cooking Substack (title, date, and subtitle from its RSS feed; product newsletter issues are not included).
 
 ### Still needed from Seth
 
 - A real portrait: add it to `public/media` and set `site.portrait` in `src/content/site.ts`.
-- A public contact email: set `site.email`. Until then `/connect` says none is published.
 
 ## Deployment
 

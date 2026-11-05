@@ -10,11 +10,7 @@ export const site = {
    * Never generate or substitute a fictional image.
    */
   portrait: null as null | { src: string; alt: string; width: number; height: number },
-  /**
-   * TODO(Seth): add a public contact email. It is intentionally not published
-   * until Seth confirms the address he wants on the site.
-   */
-  email: null as null | string,
+  email: "seth@zap.cooking" as null | string,
 } as const;
 
 export type NavItem = { href: string; label: string };
@@ -36,6 +32,11 @@ export const socialLinks: readonly SocialLink[] = [
     label: "GitHub",
     href: "https://github.com/spe1020",
     note: "Code for this site and other experiments.",
+  },
+  {
+    label: "Substack",
+    href: "https://zapcooking.substack.com",
+    note: "Essays on building, technology, and curiosity.",
   },
   {
     label: "YouTube",

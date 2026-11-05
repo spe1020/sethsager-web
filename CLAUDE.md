@@ -74,7 +74,7 @@ public/media/       project imagery
 
 ### Publishing writing
 
-Add `content/writing/<slug>.md` with frontmatter: `title`, `date` (YYYY-MM-DD), `summary`, `theme` (`building` | `thinking` | `connecting`), `status` (`draft` | `published`), optional `topic`. Drafts are listed on `/writing` as clearly labeled drafts with no article page and are excluded from the sitemap. Published posts get a page, metadata, and structured data automatically.
+Add `content/writing/<slug>.md` with frontmatter: `title`, `date` (YYYY-MM-DD), `summary`, `theme` (`building` | `thinking` | `connecting`), `status` (`draft` | `published`), optional `url` (canonical external link, e.g. Substack; the piece is indexed and links out with no page here). Drafts are listed on `/writing` as clearly labeled drafts with no article page and are excluded from the sitemap. Published posts get a page, metadata, and structured data automatically.
 
 ## Current projects (keep accurate)
 
@@ -86,7 +86,7 @@ Add `content/writing/<slug>.md` with frontmatter: `title`, `date` (YYYY-MM-DD), 
 
 Projects are defined once in `src/content/projects.ts`. Internal case-study navigation (`detailHref`) stays distinct from external links (`websiteUrl`, `links`).
 
-**Do not fabricate** metrics, testimonials, product functionality, published content, or personal details. If a fact is unknown, leave a clearly marked placeholder (see `site.ts` `TODO` fields) and tell Seth.
+**Do not fabricate** metrics, testimonials, product functionality, published content, or personal details. If a fact is unknown, leave a clearly marked placeholder (e.g. `site.portrait` stays null until a real photo exists) and tell Seth.
 
 ## Content philosophy
 
