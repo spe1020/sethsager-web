@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { EditorialLink, ExternalLink, PrimaryAction, SecondaryAction } from "@/components/Actions";
 import { Band } from "@/components/Band";
-import { Portrait } from "@/components/Portrait";
+import { Photo } from "@/components/Photo";
 import { SectionHead } from "@/components/SectionHead";
 import { SelectedWork } from "@/components/SelectedWork";
 import { WritingList } from "@/components/WritingList";
@@ -34,7 +34,9 @@ export default function HomePage() {
             <SecondaryAction href="/writing">Read my writing</SecondaryAction>
           </div>
         </div>
-        <Portrait priority />
+        <figure className="hero-photo">
+          <Photo id="hero-woods" priority sizes="(max-width: 860px) 320px, 440px" />
+        </figure>
       </section>
 
       <div className="shell">
@@ -50,6 +52,7 @@ export default function HomePage() {
           </>
         }
         caption="Manufacturing · Supply chain · Operations"
+        media={<Photo id="experience-ferris" sizes="(max-width: 860px) 100vw, 46vw" />}
         action={
           <EditorialLink href="/about" tone="dark">
             More about my background
@@ -79,6 +82,11 @@ export default function HomePage() {
       </section>
 
       <section className="shell home-section about-teaser" aria-labelledby="about-title">
+        <div className="intro-grid">
+          <figure className="intro-photo">
+            <Photo id="intro-grass" sizes="(max-width: 860px) 300px, 340px" />
+          </figure>
+          <div>
         <SectionHead id="about-title" eyebrow="About" title="Curious first, then useful." />
         <div className="about-teaser-body">
           <p>
@@ -100,6 +108,8 @@ export default function HomePage() {
           <p>
             <EditorialLink href="/about">More about me</EditorialLink>
           </p>
+        </div>
+          </div>
         </div>
       </section>
 

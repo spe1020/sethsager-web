@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ExternalLink } from "@/components/Actions";
-import { navigation, site, socialLinks } from "@/content/site";
+import { navigation, secondaryNavigation, site, socialLinks } from "@/content/site";
 
 export function SiteFooter() {
   return (
@@ -16,7 +16,7 @@ export function SiteFooter() {
               <li>
                 <Link href="/">Home</Link>
               </li>
-              {navigation.map((item) => (
+              {[...navigation, ...secondaryNavigation].map((item) => (
                 <li key={item.href}>
                   <Link href={item.href}>{item.label}</Link>
                 </li>

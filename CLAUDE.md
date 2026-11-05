@@ -61,7 +61,7 @@ Modern editorial design with the sensibility of an independent technology founde
 - Crisp geometry: 4px radius on controls and badges, 10px on cards, 8px on images. No fully rounded pills.
 - Subtle, purposeful interaction; honor `prefers-reduced-motion`
 - Mobile-first
-- Authentic imagery only
+- Authentic imagery only: real photographs of real experiences
 
 Avoid: generic SaaS templates, gradients, glows, heavy shadows, glassmorphism, decorative particles, stock photography, unnecessary visual complexity.
 
@@ -110,12 +110,14 @@ src/app/            routes, metadata, sitemap, robots, OG images
 src/components/     reusable presentation components
 src/content/        typed content: site.ts, projects.ts, connection.ts, now.ts, writing.ts
 content/writing/    Markdown essays (frontmatter + body)
-public/media/       project imagery
+public/media/       project imagery; public/media/photos/ holds the personal photography
 ```
 
 ### Routes
 
-`/` Home · `/work` · `/work/[slug]` · `/writing` · `/writing/[slug]` · `/about` · `/connection` · `/connect` · `/now`
+`/` Home · `/work` · `/work/[slug]` · `/writing` · `/writing/[slug]` · `/speaking` · `/about` · `/connection` · `/connect` · `/now`
+
+Primary navigation is six items (Work, Writing, Speaking, Connection, About, Connect) so the header stays uncrowded. Lower-priority pages such as `/now` live in the footer (`secondaryNavigation` in `site.ts`).
 
 `/connection` is the Connection project's detail page (see `detailHref` in `projects.ts`); `/work/connection` redirects there.
 
@@ -135,6 +137,38 @@ Add `content/writing/<slug>.md` with frontmatter: `title`, `date` (YYYY-MM-DD), 
 Projects are defined once in `src/content/projects.ts`. Internal case-study navigation (`detailHref`) stays distinct from external links (`websiteUrl`, `links`).
 
 **Do not fabricate** metrics, testimonials, product functionality, published content, or personal details. If a fact is unknown, leave a clearly marked placeholder (e.g. `site.portrait` stays null until a real photo exists) and tell Seth.
+
+## Photography and personal visuals
+
+The site should feel personal and authentic, not like a corporate portfolio. **Real experiences and real photography take priority over generic visuals.** Never use stock photos, and never use AI-generated or altered images of Seth.
+
+- **The formal headshot belongs on `/about`** (`site.portrait`). It is not used on the homepage.
+- **Candid personal photography is used throughout the site**, each photo in one intentional place so it never feels like a gallery. The map is in `src/content/photos.ts`:
+
+  | Photo | Where | Why |
+  | --- | --- | --- |
+  | `hero-woods` | Homepage hero | The most natural, candid image; the blue shirt echoes the palette |
+  | `experience-ferris` | Homepage "Built on experience" band, edge-to-edge | Steel, structure, and a view from above |
+  | `intro-grass` | Homepage "Curious first, then useful." | Relaxed and playful, for the personal introduction |
+  | `speaking-nostr-valley` | `/speaking`, featured engagement | Seth presenting at Nostr Valley |
+  | `connection-studio` | `/connection`, beside the show artwork | Makes the podcast feel personal |
+
+- **Treatment:** natural proportions, no filters or effects, thoughtful crops, flat offset blue accents (no blur or glow), always meaningful alt text written in `photos.ts`.
+- **Pipeline:** originals live outside the repo and are never modified. `python3 scripts/make-photos.py` applies EXIF rotation and the documented crops, **strips all metadata (several originals contain GPS coordinates)**, and writes responsive WebP + JPEG sets to `public/media/photos/` plus `src/content/photos.manifest.json`. Render photos with `<Photo id="…" sizes="…" />`, which sets intrinsic dimensions (no layout shift) and lazy-loads everything except the hero.
+- **Other people:** crops are made in the file, not with CSS, so people who are not Seth (for example the other riders in the ferris-wheel photo) are never in a published image. Do the same for any new photo.
+- The Connection image is a screenshot (898px wide); do not display it larger than that.
+- Do not add more photos casually. Each new one needs its own place and reason.
+
+## Speaking
+
+`/speaking` is a dedicated section: the primary visual is the Nostr Valley photo, with a featured engagement, four conversation topics, and an inquiry band that opens `mailto:` with the subject "Speaking Inquiry — Seth Sager".
+
+- Seth is positioned as a builder, entrepreneur, and speaker with real-world experience, **not** a professional motivational speaker. Keep it approachable and conversational.
+- The topics are **conversation starters, not a record of past talks.** Do not invent engagements, audience sizes, testimonials, or credentials.
+- The one featured engagement is Nostr Valley (co-founder and speaker; talk: "Nobody Joins a Protocol — What We Learned Building Zap Cooking"). Add others only when Seth supplies them.
+- Contact uses the email in `site.email`. The Connect page has a small Speaking link.
+
+**The personal brand remains builder-first, approachable, and grounded.** Photography and speaking support that story; they do not turn the site into a speaker bureau or portfolio.
 
 ## Manufacturing experience
 

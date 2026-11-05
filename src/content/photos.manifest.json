@@ -1,0 +1,47 @@
+{
+  "hero-woods": {
+    "widths": [
+      480,
+      720,
+      960
+    ],
+    "width": 960,
+    "height": 1280
+  },
+  "experience-ferris": {
+    "widths": [
+      640,
+      960,
+      1280
+    ],
+    "width": 1280,
+    "height": 1215
+  },
+  "intro-grass": {
+    "widths": [
+      480,
+      720,
+      960
+    ],
+    "width": 960,
+    "height": 1280
+  },
+  "speaking-nostr-valley": {
+    "widths": [
+      640,
+      1024,
+      1440,
+      1920
+    ],
+    "width": 1920,
+    "height": 1440
+  },
+  "connection-studio": {
+    "widths": [
+      640,
+      898
+    ],
+    "width": 898,
+    "height": 450
+  }
+}

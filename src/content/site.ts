@@ -7,7 +7,8 @@ export const site = {
   eyebrow: "Curious by nature. Builder by choice.",
   tagline: "There’s always a better way.",
   /**
-   * Real portrait of Seth, from /public/media. Set to null to show the placeholder.
+   * Seth's formal headshot. It belongs on /about. Candid photography (see
+   * src/content/photos.ts) is used everywhere else. Set to null to show a placeholder.
    * Never generate or substitute a fictional image.
    */
   portrait: {
@@ -21,14 +22,18 @@ export const site = {
 
 export type NavItem = { href: string; label: string };
 
+/** Primary navigation. Kept to six items so the header stays uncrowded. */
 export const navigation: readonly NavItem[] = [
   { href: "/work", label: "Work" },
   { href: "/writing", label: "Writing" },
+  { href: "/speaking", label: "Speaking" },
   { href: "/connection", label: "Connection" },
   { href: "/about", label: "About" },
-  { href: "/now", label: "Now" },
   { href: "/connect", label: "Connect" },
 ];
+
+/** Lower-priority pages: reachable from the footer rather than the header. */
+export const secondaryNavigation: readonly NavItem[] = [{ href: "/now", label: "Now" }];
 
 export type SocialLink = { label: string; href: string; note: string };
 

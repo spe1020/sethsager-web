@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { Photo } from "@/components/Photo";
 import Link from "next/link";
 import { EpisodeList } from "@/components/EpisodeList";
 import { EditorialLink, ExternalLink, SecondaryAction } from "@/components/Actions";
@@ -49,20 +50,26 @@ export default function ConnectionPage() {
         {projectStatusLabel[project.status]}
       </p>
 
-      {project.coverImage ? (
-        <figure className="detail-cover connection-hero-art">
-          <Image
-            src={project.coverImage.src}
-            priority
-            alt={project.coverImage.alt}
-            width={280}
-            height={280}
-          />
-          {project.coverImage.caption ? (
-            <figcaption className="cover-caption">{project.coverImage.caption}</figcaption>
-          ) : null}
+      <div className="connection-hero">
+        {project.coverImage ? (
+          <figure className="detail-cover connection-hero-art">
+            <Image
+              src={project.coverImage.src}
+              priority
+              alt={project.coverImage.alt}
+              width={280}
+              height={280}
+            />
+            {project.coverImage.caption ? (
+              <figcaption className="cover-caption">{project.coverImage.caption}</figcaption>
+            ) : null}
+          </figure>
+        ) : null}
+        <figure className="detail-cover connection-hero-photo">
+          <Photo id="connection-studio" priority sizes="(max-width: 860px) 100vw, 640px" />
+          <figcaption className="cover-caption">Seth at the microphone.</figcaption>
         </figure>
-      ) : null}
+      </div>
 
       <div className="listen-block">
         <h2>Listen and watch</h2>
