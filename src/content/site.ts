@@ -7,10 +7,15 @@ export const site = {
   eyebrow: "Curious by nature. Builder by choice.",
   tagline: "There’s always a better way.",
   /**
-   * Real portrait of Seth. Leave null until a photo is added to /public/media.
+   * Real portrait of Seth, from /public/media. Set to null to show the placeholder.
    * Never generate or substitute a fictional image.
    */
-  portrait: null as null | { src: string; alt: string; width: number; height: number },
+  portrait: {
+    src: "/media/seth-sager-portrait.png",
+    alt: "Seth Sager smiling, wearing glasses, a dark blazer, and a blue shirt.",
+    width: 400,
+    height: 400,
+  } as null | { src: string; alt: string; width: number; height: number },
   email: "seth@zap.cooking" as null | string,
 } as const;
 

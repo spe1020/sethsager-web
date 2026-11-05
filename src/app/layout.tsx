@@ -59,6 +59,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 url: site.url,
                 description: site.thesis,
                 sameAs: socialLinks.map((link) => link.href),
+                ...(site.portrait ? { image: `${site.url}${site.portrait.src}` } : {}),
               },
               {
                 "@type": "WebSite",
