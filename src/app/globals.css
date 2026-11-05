@@ -5,6 +5,7 @@
   --sky: #78baef;
   --ice: #eaf2fc;
   --canvas: #f7f9fc;
+  --atlantic: #101f36; /* Deep Atlantic: the full-width experience band */
   /* Derived */
   --surface: #ffffff;
   --midnight-soft: #33445c;
@@ -849,37 +850,61 @@ h2 em {
   font-size: 1.1rem;
 }
 
-.philosophy {
+.band {
   margin-top: 6rem;
-  padding: 5rem 0;
-  background: var(--midnight);
+  padding: 6.5rem 0;
+  background: var(--atlantic);
   color: var(--ice);
 }
 
-.philosophy-inner {
+.band-inner {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 3.5rem;
-  align-items: start;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 4.5rem;
+  align-items: end;
 }
 
-.philosophy h2 {
-  font-size: clamp(2.2rem, 4.4vw, 3.6rem);
-  line-height: 1.05;
+.band h2 {
   margin: 0;
+  color: #fff;
+  font-size: clamp(3rem, 7.2vw, 5.8rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.band h2 em {
+  color: var(--sky);
 }
 
 .eyebrow-on-dark {
   color: var(--sky);
 }
 
-.philosophy-body p {
-  color: #cfdcf0;
-  font-size: 1.12rem;
+.band-caption {
+  max-width: 26rem;
+  margin: 2.2rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(234, 242, 252, 0.22);
+  color: #b9cbe6;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-.philosophy-body p:last-child {
-  margin-bottom: 0;
+.band-body p {
+  color: #d3e0f2;
+  font-size: 1.18rem;
+  line-height: 1.65;
+}
+
+.band-body p:first-child {
+  color: #fff;
+  font-size: 1.3rem;
+}
+
+.band-action {
+  margin-top: 1.2rem;
 }
 
 .home-section {
@@ -992,6 +1017,56 @@ h2 em {
 
 .connect-band p:last-child {
   margin-bottom: 0;
+}
+
+.experience {
+  margin-top: 5rem;
+  padding-top: 3.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.experience h2 {
+  margin: 0;
+  max-width: 14em;
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+}
+
+.experience-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 3.5rem;
+  margin-top: 2.4rem;
+}
+
+.experience-area {
+  padding: 1.3rem 0 1.6rem;
+  border-top: 1px solid var(--line-strong);
+}
+
+.experience-area h3 {
+  margin: 0 0 0.7rem;
+  font-size: 1.5rem;
+}
+
+.experience-area p {
+  color: var(--midnight-soft);
+}
+
+.experience-area p:last-child {
+  margin-bottom: 0;
+}
+
+.experience-area a {
+  color: var(--blue-ink);
+}
+
+.experience-close {
+  max-width: 66ch;
+  margin-top: 2rem;
+}
+
+.experience-close h3 {
+  font-size: 1.7rem;
 }
 
 .about-grid {
@@ -1115,9 +1190,10 @@ h2 em {
 
 @media (max-width: 860px) {
   .hero,
-  .philosophy-inner,
+  .band-inner,
   .connect-band-inner,
   .about-grid,
+  .experience-grid,
   .writing-list {
     grid-template-columns: 1fr;
   }
@@ -1131,7 +1207,15 @@ h2 em {
     max-width: 320px;
   }
 
-  .philosophy,
+  .band {
+    margin-top: 4rem;
+    padding: 4rem 0;
+  }
+
+  .band-inner {
+    gap: 2rem;
+  }
+
   .connect-band {
     margin-top: 4rem;
     padding: 3.2rem 0;

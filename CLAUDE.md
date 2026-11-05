@@ -53,6 +53,7 @@ Modern editorial design with the sensibility of an independent technology founde
 | `--sky` | `#78BAEF` | Accent on dark surfaces |
 | `--ice` | `#EAF2FC` | Light tint: secondary buttons, bands, badges |
 | `--canvas` | `#F7F9FC` | Page background |
+| `--atlantic` | `#101F36` | Deep Atlantic. Reserved for the full-width experience band (`Band`) |
 | `--blue-ink` | `#234FC4` | Blue for text/links on light backgrounds (6.6:1). Plain `--blue` on canvas is only 4.6:1, so use it for large text and fills |
 
 - Sophisticated typography (Fraunces display, Outfit text)
@@ -134,6 +135,15 @@ Add `content/writing/<slug>.md` with frontmatter: `title`, `date` (YYYY-MM-DD), 
 Projects are defined once in `src/content/projects.ts`. Internal case-study navigation (`detailHref`) stays distinct from external links (`websiteUrl`, `links`).
 
 **Do not fabricate** metrics, testimonials, product functionality, published content, or personal details. If a fact is unknown, leave a clearly marked placeholder (e.g. `site.portrait` stays null until a real photo exists) and tell Seth.
+
+## Manufacturing experience
+
+Seth has spent **over 20 years in manufacturing, supply chain, and operations**. It is an important part of his story and it **supports, but does not replace, his builder-first identity.** He is a builder and entrepreneur first; the experience explains how he thinks.
+
+- It appears as the homepage band "Beyond the code / Built on experience." (after Selected Work, before Writing; `Band` component, Deep Atlantic) and as a section on `/about` (four areas: Manufacturing & Operations, Supply Chain & Procurement, Leadership & People, Systems & Technology). Copy lives in `src/content/experience.ts` and the homepage.
+- Keep it concise, confident, and conversational. Do **not** turn the site into a résumé: no job-title lists, employer names, timelines, or credentials.
+- Only the verified claim is "over 20 years in manufacturing, supply chain, and operations". **Never fabricate** company names, career milestones, metrics, or accomplishments. If Seth supplies specifics, add them deliberately.
+- Avoid corporate jargon and motivational clichés. Frame experience as how it shapes what he builds, not as credentials.
 
 ## Content philosophy
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { EditorialLink, ExternalLink, PrimaryAction, SecondaryAction } from "@/components/Actions";
+import { Band } from "@/components/Band";
 import { Portrait } from "@/components/Portrait";
 import { SectionHead } from "@/components/SectionHead";
 import { SelectedWork } from "@/components/SelectedWork";
@@ -40,31 +41,31 @@ export default function HomePage() {
         <SelectedWork />
       </div>
 
-      <section className="philosophy" aria-labelledby="philosophy-title">
-        <div className="shell philosophy-inner">
-          <div>
-            <p className="eyebrow eyebrow-on-dark">Philosophy</p>
-            <h2 id="philosophy-title">Complexity is easy to create. Simplicity takes work.</h2>
-          </div>
-          <div className="philosophy-body">
-            <p>
-              Manufacturing and operations taught me to look at how work actually moves: where it
-              stalls, who inherits the mess, and why the same problem keeps coming back. The fix is
-              rarely a bigger system. It is usually a clearer one.
-            </p>
-            <p>
-              Continuous improvement is a habit of noticing, trying something small, checking
-              whether it worked, and keeping what was learned. I bring that same loop to
-              entrepreneurship and software: build the simple version, put it in front of real use,
-              and let reality edit the plan.
-            </p>
-            <p>
-              The tools I make share one aim. Take something complicated, make it easier to
-              understand, and leave the person using it with more say than they started with.
-            </p>
-          </div>
-        </div>
-      </section>
+      <Band
+        id="experience-title"
+        eyebrow="Beyond the code"
+        title={
+          <>
+            Built on <em>experience.</em>
+          </>
+        }
+        caption="Manufacturing · Supply chain · Operations"
+        action={
+          <EditorialLink href="/about" tone="dark">
+            More about my background
+          </EditorialLink>
+        }
+      >
+        <p>
+          I’ve spent over 20 years in manufacturing, supply chain, and operations, working to
+          understand how things work, where they break down, and how to make them better.
+        </p>
+        <p>
+          That experience shapes how I approach everything I build today. Whether it’s a production
+          process, a business, or a piece of software, the fundamentals are often the same:
+          understand the problem, challenge assumptions, and keep improving.
+        </p>
+      </Band>
 
       <section className="shell home-section" aria-labelledby="writing-title">
         <SectionHead id="writing-title" eyebrow="Writing" title="Thinking out loud.">
